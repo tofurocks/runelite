@@ -24,3 +24,4 @@ runelite-client/dependencies.txt
 .vscode
 .factorypath
 hs_err_pid*.log
+*.hprof
