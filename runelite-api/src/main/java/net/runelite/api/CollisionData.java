@@ -43,4 +43,12 @@ public interface CollisionData
 	 * @see net.runelite.api.Constants#SCENE_SIZE
 	 */
 	int[][] getFlags();
+
+	int getXInset();
+
+	int getYInset();
+
+	int getXSize();
+
+	int getYSize();
 }

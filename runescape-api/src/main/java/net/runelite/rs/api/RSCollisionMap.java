@@ -5,6 +5,18 @@ import net.runelite.mapping.Import;
 
 public interface RSCollisionMap extends CollisionData
 {
+	@Import("xInset")
+	int getXInset();
+
+	@Import("yInset")
+	int getYInset();
+
+	@Import("xSize")
+	int getXSize();
+
+	@Import("ySize")
+	int getYSize();
+
 	@Import("flags")
 	int[][] getFlags();
 }

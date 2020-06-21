@@ -16,6 +16,11 @@ import javax.annotation.Nullable;
 
 public final class TileItem extends Item implements TileEntity, net.runelite.api.TileItem {
 
+    @Override
+    public int getSpawnTime() {
+        return 0;
+    }
+
     private interface Excludes{
         net.runelite.api.TileItem getHash();
     }

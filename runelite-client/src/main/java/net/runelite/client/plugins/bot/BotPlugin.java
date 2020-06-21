@@ -19,7 +19,7 @@ import net.runelite.client.eventbus.Subscribe;
 import net.runelite.client.game.WorldService;
 import net.runelite.client.plugins.Plugin;
 import net.runelite.client.plugins.PluginDescriptor;
-import net.runelite.client.plugins.quest.QuestPlugin;
+import net.runelite.client.plugins.info.InfoPlugin;
 import net.runelite.client.ui.ClientToolbar;
 import net.runelite.client.ui.DrawManager;
 import net.runelite.client.ui.NavigationButton;
@@ -135,7 +135,7 @@ public class BotPlugin extends Plugin {
         botManager = new BotManager();
         navButton = NavigationButton.builder()
             .tooltip("Bot")
-            .icon(ImageUtil.getResourceStreamFromClass(QuestPlugin.class, "info_icon.png"))
+            .icon(ImageUtil.getResourceStreamFromClass(InfoPlugin.class, "info_icon.png"))
             .priority(-420)
             .panel(new BotPanel(botManager))
             .build();

@@ -13,7 +13,7 @@ public enum Tab {
     EQUIPMENT(WidgetInfo.FIXED_VIEWPORT_EQUIPMENT_TAB.getChildId()),
     PRAYER(WidgetInfo.FIXED_VIEWPORT_PRAYER_TAB.getChildId()),
     MAGIC(WidgetInfo.FIXED_VIEWPORT_MAGIC_TAB.getChildId()),
-    CLAN_CHAT(WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId()),
+    //CLAN_CHAT(WidgetInfo.FIXED_VIEWPORT_CLAN_CHAT_TAB.getChildId()), //Outdated
     FRIENDS(WidgetInfo.FIXED_VIEWPORT_FRIENDS_TAB.getChildId()),
     ACCOUNT(WidgetInfo.FIXED_VIEWPORT_IGNORES_TAB.getChildId()),
     OPTIONS(WidgetInfo.FIXED_VIEWPORT_OPTIONS_TAB.getChildId()),

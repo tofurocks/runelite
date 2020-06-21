@@ -30,6 +30,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import javax.annotation.Nullable;
+
+import lombok.Data;
 import lombok.Value;
 import net.runelite.api.Client;
 import static net.runelite.api.Constants.CHUNK_SIZE;
@@ -42,7 +44,7 @@ import net.runelite.api.Perspective;
  * WorldPoints are immutable. Methods that modify the properties create a new
  * instance.
  */
-@Value
+@Data
 public class WorldPoint
 {
 	/**
