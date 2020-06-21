@@ -31,6 +31,10 @@ import com.google.common.annotations.VisibleForTesting;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.runemax.bot.scripts.Store;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import java.io.File;
@@ -49,6 +53,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.Properties;
 import java.util.UUID;
+import java.util.concurrent.TimeoutException;
 import javax.annotation.Nullable;
 import javax.inject.Provider;
 import javax.inject.Singleton;
@@ -232,6 +237,18 @@ public class RuneLite
 
 	public static void main(String[] args) throws Exception
 	{
+		/** Create channel for communicating over rabbitMQ */
+		ConnectionFactory factory = new ConnectionFactory();
+		factory.setHost("localhost");
+		Connection connection = null;
+		try {
+			connection = factory.newConnection();
+		} catch (TimeoutException e) {
+			e.printStackTrace();
+		}
+		Channel channel = connection.createChannel();
+		Store.setChannel(channel);
+
 		Locale.setDefault(Locale.ENGLISH);
 
 		final OptionParser parser = new OptionParser();
