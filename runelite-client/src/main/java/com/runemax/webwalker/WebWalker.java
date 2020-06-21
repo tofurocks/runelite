@@ -67,7 +67,6 @@ public final class WebWalker {
      * This needs to be run once to initialise the web
      */
     public static void initialise() {
-
         URL webwalkerPath = WebWalker.class.getResource(FILENAME);
         if (webwalkerPath == null) {
             log.error("Webwalker data file {} cannot be found", FILENAME);

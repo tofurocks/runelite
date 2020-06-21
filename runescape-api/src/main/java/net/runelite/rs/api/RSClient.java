@@ -1269,4 +1269,21 @@ public interface RSClient extends RSGameShell, Client
 
 	@Import("rightTitleSprite")
 	void setRightTitleSprite(Sprite background);
+
+	/** Added for fartbot usage */
+
+	@Import("Login_response0")
+	String getLoginResponse0();
+
+	@Import("Login_response1")
+	String getLoginResponse1();
+
+	@Import("Login_response2")
+	String getLoginResponse2();
+
+	@Import("Login_response3")
+	String getLoginResponse3();
+
+	@Import("isItemSelected")
+	int getIsItemSelected();
 }
