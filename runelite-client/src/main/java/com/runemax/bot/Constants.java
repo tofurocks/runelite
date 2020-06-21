@@ -60,7 +60,7 @@ public class Constants {
 //    public static final WorldPoint POINT_RIMMINGTON = new WorldPoint(2956, 3216, 0);
 //    public static final WorldPoint POINT_FALADOR = new WorldPoint(2965, 3381, 0);
 //    public static final WorldPoint POINT_EDGEVILLE = new WorldPoint(3087, 3493, 0);
-    public static final WorldPoint POINT_GRAND_EXCHANGE = new WorldPoint(3164, 3478, 0);
+    public static final WorldPoint POINT_GRAND_EXCHANGE = new WorldPoint(3164, 3485, 0);
 //    public static final WorldPoint POINT_VARROCK = new WorldPoint(3211, 3423, 0);
 //    public static final WorldPoint POINT_LUMBRIDGE = new WorldPoint(3235, 3219, 0);
 //    public static final WorldPoint POINT_DRAYNOR = new WorldPoint(3081, 3250, 0);

@@ -115,7 +115,7 @@ public class GetMagicSupplies extends Task {
     }
 
     private void tradeMule() {
-        if (!GRAND_EXCHANGE.contains(Players.getLocal())) {
+        if (POINT_GRAND_EXCHANGE.distanceTo(Players.getLocal().getWorldLocation()) > 4) {
             log.info("Walking to grand exchange to trade mule");
             walkToGrandExchange.execute(null);
             Sleep.sleep(gaussian(50, 15 * 1000, 1500, 1000));
