@@ -152,6 +152,8 @@ public class AutoFight extends Task {
     }
 
     private void hopToRandomF2PWorld() {
+        Sleep.until(()->Players.getLocal().getAnimation() == -1, Rand.nextInt(10*1000, 20*1000));
+        Sleep.sleep(10*1000, 15*1000); //Wait a bit so we don't get the "wait until 10 second after combat" message
         int initialWorldId = Worlds.getCurrentWorldId();
         World randomWorld = Worlds.getRandom(world -> !world.getTypes().contains(WorldType.MEMBERS) && !world.getTypes().contains(WorldType.PVP) && !world.getTypes().contains(WorldType.SKILL_TOTAL));
         Worlds.switchTo(randomWorld);

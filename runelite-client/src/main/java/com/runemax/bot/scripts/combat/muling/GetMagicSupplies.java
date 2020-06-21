@@ -45,6 +45,7 @@ public class GetMagicSupplies extends Task {
     WalkTask walkToGrandExchange = new WalkTask("walk to GE", POINT_GRAND_EXCHANGE);
     boolean seenSecondTradeScreen = false; //Have we seen the second trade screen yet
     int strike = 0;
+    int tradeAttempt = 0;
 
     public GetMagicSupplies() {
         channel = Store.getChannel();
@@ -115,20 +116,24 @@ public class GetMagicSupplies extends Task {
     }
 
     private void tradeMule() {
-        if (POINT_GRAND_EXCHANGE.distanceTo(Players.getLocal().getWorldLocation()) > 4) {
+        Player mule = Players.closest(offer.getHandle());
+        if (!mule.isPresent()) {
             log.info("Walking to grand exchange to trade mule");
             walkToGrandExchange.execute(null);
             Sleep.sleep(gaussian(50, 15 * 1000, 1500, 1000));
             return;
         }
-        Player mule = Players.closest(offer.getHandle());
-        if (mule.isEmpty()) {
-            log.info("Mule is not here yet");
-            Sleep.sleep(5000);
-            return;
-        }
         if (Trade.getView() == Trade.View.CLOSED) {
-            log.info("Trading mule");
+            if(tradeAttempt > 5){
+                log.info("We tried to trade the mule over 5 times and they never traded us back, expiring everthing");
+                strike = 0;
+                tradeAttempt = 0;
+                state = REQUEST_NOT_SENT;
+                offer = null;
+                return;
+            }
+            tradeAttempt++;
+            log.info("Trading mule, attempt " + tradeAttempt);
             mule.interact("Trade");
             Sleep.until(() -> Trade.getView() == Trade.View.FIRST, Rand.nextInt(10 * 1000, 20 * 1000));
             return;
