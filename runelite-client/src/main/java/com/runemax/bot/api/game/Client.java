@@ -1508,62 +1508,62 @@ public class Client {
      *
      * @return the number of clan chat members
      */
-    public static int getClanChatCount() {
+    /**public static int getClanChatCount() {
         return getInstance().getClanChatCount();
-    }
+    }*/
 
     /**
      * Gets an array of players in the clan chat.
      *
      * @return the clan chat members, null if not in a clan
      */
-    public static ClanMember[] getClanMembers() {
+    /**public static ClanMember[] getClanMembers() {
         return getInstance().getClanMembers();
-    }
+    }*/
 
     /**
      * Gets the clan owner of the currently joined clan chat
      */
-    public static String getClanOwner() {
+    /**public static String getClanOwner() {
         return getInstance().getClanOwner();
-    }
+    }*/
 
     /**
      * Gets the clan chat name of the currently joined clan chat
      */
-    public static String getClanChatName() {
+    /**public static String getClanChatName() {
         return getInstance().getClanChatName();
-    }
+    }*/
 
     /**
      * Gets an array of players in the friends list.
      *
      * @return the friends list
      */
-    public static Friend[] getFriends() {
+    /**public static Friend[] getFriends() {
         return getInstance().getFriends();
-    }
+    }*/
 
     /**
      * Gets the number of friends on the friends list.
      */
-    public static int getFriendsCount() {
+    /**public static int getFriendsCount() {
         return getInstance().getFriendsCount();
-    }
+    }*/
 
     /**
      * Gets an array of players on the ignore list.
      */
-    public static Ignore[] getIgnores() {
+    /**public static Ignore[] getIgnores() {
         return getInstance().getIgnores();
-    }
+    }*/
 
     /**
      * Gets the number of ignored players on the ignore list.
      */
-    public static int getIgnoreCount() {
+    /**public static int getIgnoreCount() {
         return getInstance().getIgnoreCount();
-    }
+    }*/
 
     /**
      * Checks whether a player is in the same clan chat.
@@ -1571,9 +1571,9 @@ public class Client {
      * @param name the name of the player
      * @return true if the player is in clan chat
      */
-    public static boolean isClanMember(String name) {
+    /**public static boolean isClanMember(String name) {
         return getInstance().isClanMember(name);
-    }
+    }*/
 
     /**
      * Gets the clients saved preferences.
@@ -1984,9 +1984,9 @@ public class Client {
      *
      * @param state the new clan mates hidden state
      */
-    public static void setClanMatesHidden(boolean state) {
+    /**public static void setClanMatesHidden(boolean state) {
         getInstance().setClanMatesHidden(state);
-    }
+    }*/
 
     /**
      * Sets whether the local player is hidden.
@@ -2439,16 +2439,16 @@ public class Client {
         getInstance().setRenderSelf(enabled);
     }
 
-    public static void invokeMenuAction(String option, String target, int identifier, int opcode, int param0, int param1) {
-        getInstance().invokeMenuAction(option, target, identifier, opcode, param0, param1);
+    public static void invokeMenuOpcode(String option, String target, int identifier, int opcode, int param0, int param1) {
+        getInstance().invokeMenuOpcode(option, target, identifier, opcode, param0, param1);
     }
 
     public static MouseRecorder getMouseRecorder() {
         return getInstance().getMouseRecorder();
     }
 
-    public static void setPrintMenuActions(boolean b) {
-        getInstance().setPrintMenuActions(b);
+    public static void setPrintMenuOpcodes(boolean b) {
+        getInstance().setPrintMenuOpcodes(b);
     }
 
     public static String getSelectedSpellName() {

@@ -47,6 +47,12 @@ dependencies {
     compileOnly(group = "org.projectlombok", name = "lombok", version = "1.18.12")
     compileOnly(group = "net.runelite", name = "orange-extensions", version = "1.0")
 
+    implementation(group="org.jogamp.gluegen", name="gluegen-rt", version="2.3.2")
+    implementation(group="org.jogamp.jogl", name="jogl-all", version="2.3.2")
+    implementation(group="com.fasterxml.jackson.core", name="jackson-databind", version="2.11.0")
+    implementation(group="com.rabbitmq", name="amqp-client", version="5.9.0")
+    implementation(group = "com.sun.jersey", name = "jersey-client", version = "1.9.1")
+    implementation(group = "org.jboss.aerogear", name="aerogear-otp-java", version = "1.0.0")
     implementation(group = "ch.qos.logback", name = "logback-classic", version = "1.2.3")
     implementation(group = "com.google.code.gson", name = "gson", version = "2.8.6")
     implementation(group = "com.google.guava", name = "guava", version = "29.0-jre")

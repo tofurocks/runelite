@@ -227,7 +227,7 @@ public abstract class RSClientMixin implements RSClient
 
 	@Inject
 	@Override
-	public void setPrintMenuActions(boolean yes)
+	public void setPrintMenuOpcodes(boolean yes)
 	{
 		printMenuActions = yes;
 	}

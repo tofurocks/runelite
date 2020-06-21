@@ -1,7 +1,7 @@
 package com.runemax.bot.api.wrappers.widget;
 
 import lombok.experimental.Delegate;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.widgets.WidgetType;
 import com.runemax.bot.api.game.OnGameThread;
 import com.runemax.bot.api.wrappers.Interactable;
@@ -89,16 +89,16 @@ public class Widget extends RlWrapper<net.runelite.api.widgets.Widget> implement
         switch (getType()) {
             case WidgetType.LAYER:
             case WidgetType.RECTANGLE:
-                return MenuAction.CC_OP.getId();
+                return MenuOpcode.CC_OP.getId();
             case WidgetType.GRAPHIC:
                 String targetVerb = getTargetVerb();
-                return targetVerb == null||targetVerb.isEmpty() ? MenuAction.CC_OP.getId() : MenuAction.WIDGET_TYPE_2.getId();
+                return targetVerb == null||targetVerb.isEmpty() ? MenuOpcode.CC_OP.getId() : MenuOpcode.WIDGET_TYPE_2.getId();
             case WidgetType.INVENTORY:
-                return MenuAction.WIDGET_TYPE_2.getId();
+                return MenuOpcode.WIDGET_TYPE_2.getId();
             case WidgetType.TEXT:
-                return MenuAction.WIDGET_TYPE_6.getId();
+                return MenuOpcode.WIDGET_TYPE_6.getId();
             case WidgetType.MODEL:
-                return MenuAction.WIDGET_TYPE_1.getId();
+                return MenuOpcode.WIDGET_TYPE_1.getId();
             default:
                 throw new IllegalArgumentException("no menu action for widget type " + getType());
         }
@@ -116,6 +116,6 @@ public class Widget extends RlWrapper<net.runelite.api.widgets.Widget> implement
 
     @Override
     public int getMenuTypeForUseItemOn() {
-        return MenuAction.ITEM_USE_ON_WIDGET.getId();
+        return MenuOpcode.ITEM_USE_ON_WIDGET.getId();
     }
 }

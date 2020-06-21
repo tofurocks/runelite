@@ -8,7 +8,7 @@ import com.runemax.bot.api.interact.Interact;
 import com.runemax.bot.api.itemcontainer.ItemContainer;
 import com.runemax.bot.api.wrappers.Interactable;
 import net.runelite.api.InventoryID;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 
 import javax.annotation.Nonnull;
 import java.util.*;
@@ -22,7 +22,7 @@ public class Inventory {
     }
 
     public static void useOn(Predicate<? super InventoryItem> predicate, Interactable target) {
-        Inventory.first(predicate).interact(MenuAction.ITEM_USE.getId(), null);
+        Inventory.first(predicate).interact(MenuOpcode.ITEM_USE.getId(), null);
 
         if(!Sleep.untilWithConfirm(()-> Interact.isReady() && Inventory.isItemSelected(), 1000)) {
             throw new BotException("item never selected");

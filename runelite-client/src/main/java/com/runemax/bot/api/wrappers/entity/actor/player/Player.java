@@ -7,7 +7,7 @@ import com.runemax.bot.api.wrappers.RlWrapper;
 import com.runemax.bot.api.wrappers.entity.actor.Actor;
 import lombok.experimental.Delegate;
 import net.runelite.api.Entity;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 
 import javax.annotation.Nonnull;
 
@@ -43,30 +43,30 @@ public final class Player extends RlWrapper<net.runelite.api.Player> implements 
     public int getMenuType(int actionIndex) {
         switch (actionIndex) {
             case 0:
-                return MenuAction.PLAYER_FIRST_OPTION.getId();
+                return MenuOpcode.PLAYER_FIRST_OPTION.getId();
             case 1:
-                return MenuAction.PLAYER_SECOND_OPTION.getId();
+                return MenuOpcode.PLAYER_SECOND_OPTION.getId();
             case 2:
-                return MenuAction.PLAYER_THIRD_OPTION.getId();
+                return MenuOpcode.PLAYER_THIRD_OPTION.getId();
             case 3:
-                return MenuAction.PLAYER_FOURTH_OPTION.getId();
+                return MenuOpcode.PLAYER_FOURTH_OPTION.getId();
             case 4:
-                return MenuAction.PLAYER_FIFTH_OPTION.getId();
+                return MenuOpcode.PLAYER_FIFTH_OPTION.getId();
             case 5:
-                return MenuAction.PLAYER_SIXTH_OPTION.getId();
+                return MenuOpcode.PLAYER_SIXTH_OPTION.getId();
         }
 
-        throw new IllegalArgumentException("no menuaction for index" + actionIndex);
+        throw new IllegalArgumentException("no MenuOpcode for index" + actionIndex);
     }
 
     @Override
     public int getMenuTypeForUseItemOn() {
-        return MenuAction.ITEM_USE_ON_PLAYER.getId();
+        return MenuOpcode.ITEM_USE_ON_PLAYER.getId();
     }
 
     @Override
     public int getMenuTypeForCastSpellOn(){
-        return MenuAction.SPELL_CAST_ON_PLAYER.getId();
+        return MenuOpcode.SPELL_CAST_ON_PLAYER.getId();
     }
 
     @Override

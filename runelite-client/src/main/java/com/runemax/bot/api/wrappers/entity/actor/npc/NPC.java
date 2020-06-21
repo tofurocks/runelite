@@ -1,7 +1,7 @@
 package com.runemax.bot.api.wrappers.entity.actor.npc;
 
 import lombok.experimental.Delegate;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.NPCDefinition;
 import net.runelite.api.Entity;
 import com.runemax.bot.api.game.OnGameThread;
@@ -50,27 +50,27 @@ public final class NPC extends RlWrapper<net.runelite.api.NPC> implements Actor,
     public int getMenuType(int actionIndex) {
         switch (actionIndex) {
             case 0:
-                return MenuAction.NPC_FIRST_OPTION.getId();
+                return MenuOpcode.NPC_FIRST_OPTION.getId();
             case 1:
-                return MenuAction.NPC_SECOND_OPTION.getId();
+                return MenuOpcode.NPC_SECOND_OPTION.getId();
             case 2:
-                return MenuAction.NPC_THIRD_OPTION.getId();
+                return MenuOpcode.NPC_THIRD_OPTION.getId();
             case 3:
-                return MenuAction.NPC_FOURTH_OPTION.getId();
+                return MenuOpcode.NPC_FOURTH_OPTION.getId();
             case 4:
-                return MenuAction.NPC_FIFTH_OPTION.getId();
+                return MenuOpcode.NPC_FIFTH_OPTION.getId();
         }
 
-        throw new IllegalArgumentException("no menuaction for index" + actionIndex);
+        throw new IllegalArgumentException("no MenuOpcode for index" + actionIndex);
     }
 
     @Override
     public int getMenuTypeForUseItemOn() {
-        return MenuAction.ITEM_USE_ON_NPC.getId();
+        return MenuOpcode.ITEM_USE_ON_NPC.getId();
     }
 
     @Override
     public int getMenuTypeForCastSpellOn(){
-        return MenuAction.SPELL_CAST_ON_NPC.getId();
+        return MenuOpcode.SPELL_CAST_ON_NPC.getId();
     }
 }

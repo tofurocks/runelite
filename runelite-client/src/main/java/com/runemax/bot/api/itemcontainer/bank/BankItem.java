@@ -3,7 +3,7 @@ package com.runemax.bot.api.itemcontainer.bank;
 import com.runemax.bot.api.itemcontainer.ContainerItem;
 import com.runemax.bot.api.widget.Dialog;
 import net.runelite.api.Item;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.widgets.WidgetInfo;
 
 import java.util.Objects;
@@ -21,7 +21,7 @@ public class BankItem extends ContainerItem {
 
     @Override
     public int getMenuType(int actionIndex) {
-        return MenuAction.CC_OP.getId();
+        return MenuOpcode.CC_OP.getId();
     }
 
     @Override

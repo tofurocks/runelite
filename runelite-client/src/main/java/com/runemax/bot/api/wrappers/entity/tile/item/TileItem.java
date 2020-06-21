@@ -6,7 +6,7 @@ import com.runemax.bot.api.wrappers.entity.tile.TileEntity;
 import com.runemax.bot.api.wrappers.item.Item;
 import lombok.experimental.Delegate;
 import net.runelite.api.Entity;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.Tile;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
@@ -67,7 +67,7 @@ public final class TileItem extends Item implements TileEntity, net.runelite.api
     public int getMenuType(int actionIndex) {
         switch (actionIndex){
             case 2:
-                return MenuAction.GROUND_ITEM_THIRD_OPTION.getId();
+                return MenuOpcode.GROUND_ITEM_THIRD_OPTION.getId();
             default:
                 throw new IllegalArgumentException("no opcode for " + actionIndex);
         }
@@ -82,12 +82,12 @@ public final class TileItem extends Item implements TileEntity, net.runelite.api
 
     @Override
     public int getMenuTypeForUseItemOn() {
-        return MenuAction.ITEM_USE_ON_GROUND_ITEM.getId();
+        return MenuOpcode.ITEM_USE_ON_GROUND_ITEM.getId();
     }
 
     @Override
     public int getMenuTypeForCastSpellOn(){
-        return MenuAction.SPELL_CAST_ON_GROUND_ITEM.getId();
+        return MenuOpcode.SPELL_CAST_ON_GROUND_ITEM.getId();
     }
 
 }

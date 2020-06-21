@@ -5,7 +5,7 @@ import com.runemax.bot.api.itemcontainer.ContainerItem;
 import lombok.Getter;
 import net.runelite.api.EquipmentInventorySlot;
 import net.runelite.api.Item;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.kit.KitType;
 import net.runelite.api.widgets.WidgetInfo;
 
@@ -64,7 +64,7 @@ public class EquipmentItem extends ContainerItem {
 
     @Override
     public int getMenuType(int actionIndex) {
-        return actionIndex > 4 ? MenuAction.CC_OP_LOW_PRIORITY.getId() : MenuAction.CC_OP.getId();
+        return actionIndex > 4 ? MenuOpcode.CC_OP_LOW_PRIORITY.getId() : MenuOpcode.CC_OP.getId();
     }
 
     @Override

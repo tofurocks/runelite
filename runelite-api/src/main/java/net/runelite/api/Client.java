@@ -1862,7 +1862,7 @@ public interface Client extends GameShell
 
 	MouseRecorder getMouseRecorder();
 
-	void setPrintMenuActions(boolean b);
+	void setPrintMenuOpcodes(boolean b);
 
 	String getSelectedSpellName();
 
@@ -2042,4 +2042,36 @@ public interface Client extends GameShell
 	 * Gets whether the flames on the login screen should be rendered
 	 */
 	boolean shouldRenderLoginScreenFire();
+
+	/**
+	 * Extra stuff added for fartbot usage
+	 * @author fatretard
+	 */
+
+	Widget[][] getWidgets();
+
+	void invokeMenuOpcode(String option, String target, int identifier, int opcode, int param0, int param1);
+
+	int getSelectedSceneTileX();
+
+	int getSelectedSceneTileY();
+
+	void setSelectedSceneTileX(int x);
+
+	void setSelectedSceneTileY(int y);
+
+	void setViewportWalking(boolean viewportWalking);
+
+	boolean getViewportWalking();
+
+	String getLoginResponse0();
+
+	String getLoginResponse1();
+
+	String getLoginResponse2();
+
+	String getLoginResponse3();
+
+	int getIsItemSelected();
+
 }

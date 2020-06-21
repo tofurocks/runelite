@@ -19,7 +19,7 @@ import com.runemax.bot.api.wrappers.entity.actor.player.Player;
 import com.runemax.bot.api.wrappers.entity.tile.object.TileObject;
 import com.runemax.bot.api.wrappers.widget.Widget;
 import lombok.extern.slf4j.Slf4j;
-import net.runelite.api.MenuAction;
+import net.runelite.api.MenuOpcode;
 import net.runelite.api.coords.LocalPoint;
 import net.runelite.api.coords.WorldPoint;
 import net.runelite.api.widgets.WidgetID;
@@ -241,7 +241,7 @@ public class Tutorial extends BotScript {
                 break;
             case 520:
                 LocalPoint hintPoint520 = LocalPoint.fromWorld(Client.getInstance(), new WorldPoint(3119, 3121, Client.getPlane()));
-                Interact.interact("", "", 26815, MenuAction.GAME_OBJECT_FIRST_OPTION.getId(), hintPoint520.getSceneX(), hintPoint520.getSceneY());
+                Interact.interact("", "", 26815, MenuOpcode.GAME_OBJECT_FIRST_OPTION.getId(), hintPoint520.getSceneX(), hintPoint520.getSceneY());
                 break;
             case 531:
                 Tabs.open(Tab.ACCOUNT);
