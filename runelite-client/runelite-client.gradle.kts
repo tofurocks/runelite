@@ -170,4 +170,5 @@ tasks {
         classpath = project.sourceSets.main.get().runtimeClasspath
         main = "net.runelite.client.RuneLite"
     }
+
 }

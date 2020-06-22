@@ -50,7 +50,7 @@ public class MuleCombatItems extends BotScript {
         }
         if (Trade.getView().equals(Trade.View.CLOSED) && seenSecondTradeScreen) {
             /** We have already seen the second trade screen and we are not in a trade, we probably completed our trade already */
-            log.info("We have seen second trade screen already and we are not in a trade, setting current request to null and acknowledged to false");
+            log.info("We have seen second trade screen already and we are not in a trade, expiring everything");
            expireRequest();
             return;
         }
@@ -240,5 +240,6 @@ public class MuleCombatItems extends BotScript {
         currentRequest = null; //TODO: find a better solution
         acknowledged = false;
         seenSecondTradeScreen = false;
+        tradesAttempted = 0;
     }
 }
