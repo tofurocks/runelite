@@ -152,6 +152,13 @@ tasks {
 
     shadowJar {
         archiveClassifier.set("shaded")
+
+        doLast {
+            copy {
+                from(shadowJar.get().outputs.files.asPath)
+                into("C:\\Users\\dankmemes\\Documents\\Hacking\\fartbot")
+            }
+        }
     }
 
     processResources {
@@ -162,13 +169,6 @@ tasks {
 
     withType<BootstrapTask> {
         group = "openosrs"
-    }
-
-    register<JavaExec>("RuneLite.main()") {
-        group = "openosrs"
-
-        classpath = project.sourceSets.main.get().runtimeClasspath
-        main = "net.runelite.client.RuneLite"
     }
 
 }
