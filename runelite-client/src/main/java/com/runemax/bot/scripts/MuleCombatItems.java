@@ -43,7 +43,6 @@ public class MuleCombatItems extends BotScript {
 
     @Override
     protected void loop() {
-        System.out.println("Loop");
         if(Inventory.count("Mind rune") < 10*1000 || !Inventory.first("Staff of air").isPresent()){
             log.info("Out of items, stopping");
             this.stopLooping();
@@ -126,7 +125,6 @@ public class MuleCombatItems extends BotScript {
         TimerTask clickTab = new TimerTask() {
             @Override
             public void run() {
-                log.info("Clicking a tab");
                 int choice = Rand.nextInt(0, 4);
                 if (choice == 0) {
                     Tabs.open(Tab.INVENTORY);
