@@ -22,7 +22,7 @@ public class WalkToCows extends Task {
     TraversableWorldPoint LUM_COWS_POINT = new TraversableWorldPoint(3178, 3322, 0);
     TraversableWorldPoint LUM_BRIDGE_POINT = new TraversableWorldPoint(3243, 3262, 0);
     RectangularArea BIG_VARROCK_AREA = new RectangularArea(3140, 3514, 3281, 3349);
-    RectangularArea HALFWAY_VARROCK_AREA = new RectangularArea(3204, 3351, 3269, 3309);
+    RectangularArea HALFWAY_VARROCK_AREA = new RectangularArea(3204, 3351, 3269, 3290);
 
 
     WalkTask walkToCows = new WalkTask("walk to lumbridge cows", LUM_COWS_POINT);
@@ -49,7 +49,7 @@ public class WalkToCows extends Task {
         if(BIG_VARROCK_AREA.contains(Players.getLocal()) || HALFWAY_VARROCK_AREA.contains(Players.getLocal())){
             log.info("Walking to lumbridge first so we don't get fucked up by the draynor trees");
             walkToLumbridge.execute(null);
-            return Rand.nextInt(1000, 2000);
+            return Rand.nextInt(5*1000, 10*1000);
         }
         log.info("Walking to lumbridge cows");
         walkToCows.execute(null);

@@ -42,6 +42,8 @@ public class Construction extends BotScript {
     public void onStart(String launchArg) {
         super.onStart(launchArg);
         tasks.add(new StopIfDoneConstruction());
+        tasks.add(new DoInitialUnnoteItems());
+        tasks.add(new EquipConstructionGear());
         tasks.add(new BuyHouse());
         tasks.add(new TeleportToPOH());
         tasks.add(new BuildFurniture());

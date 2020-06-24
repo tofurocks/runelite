@@ -36,7 +36,7 @@ import static com.runemax.bot.api.commons.Rand.gaussian;
 public class MuleCombatItems extends BotScript {
     RestockRequest currentRequest = null;
     boolean acknowledged = false;
-    boolean seenSecondTradeScreen = false; //Have we seen the second trade screen yet
+    //boolean seenSecondTradeScreen = false; //Have we seen the second trade screen yet
     Channel channel;
     Timer timer;
     int tradesAttempted = 0;
@@ -48,12 +48,12 @@ public class MuleCombatItems extends BotScript {
             this.stopLooping();
             return;
         }
-        if (Trade.getView().equals(Trade.View.CLOSED) && seenSecondTradeScreen) {
-            /** We have already seen the second trade screen and we are not in a trade, we probably completed our trade already */
+        /**if (Trade.getView().equals(Trade.View.CLOSED) && seenSecondTradeScreen) {
+           // We have already seen the second trade screen and we are not in a trade, we probably completed our trade already
             log.info("We have seen second trade screen already and we are not in a trade, expiring everything");
            expireRequest();
             return;
-        }
+        }*/
         if (acknowledged == true) {
             /** Our offer was acknowledged, we should trade guy */
             log.info("Acknowledged is true");
@@ -99,8 +99,11 @@ public class MuleCombatItems extends BotScript {
                 }
             }
             if (Trade.getView().equals(Trade.View.SECOND)) {
-                log.info("Setting seen second trade screen to true");
-                seenSecondTradeScreen = true;
+                log.info("Accepting second trade window, waiting for it to close and expiring everything");
+                Trade.accept();
+                Sleep.until(()->Trade.getView().equals(Trade.View.CLOSED), Rand.nextInt(10*1000, 20*1000));
+                expireRequest();
+                return;
             }
             log.info("Accepting trade");
             Trade.accept(); //TODO: set current request back to null
@@ -180,6 +183,11 @@ public class MuleCombatItems extends BotScript {
             RestockRequest request = new ObjectMapper().readValue(message, RestockRequest.class);
             System.out.println("Received restock request: " + request.toString());
             if (currentRequest != null) {
+                if(request.getHandle().equals(currentRequest.getHandle())){
+                    log.info("Received restock request from current request guy, setting acknowledged to true");
+                    acknowledged = true;
+                    return;
+                }
                 System.out.println("We are already handling a request from " + currentRequest.getHandle() +  " currently");
                 long timeSinceRequest = System.currentTimeMillis() - currentRequest.getTime();
                 log.info("currentRequest time: " + currentRequest.getTime());
@@ -239,7 +247,6 @@ public class MuleCombatItems extends BotScript {
         log.info("Expiring request");
         currentRequest = null; //TODO: find a better solution
         acknowledged = false;
-        seenSecondTradeScreen = false;
         tradesAttempted = 0;
     }
 }

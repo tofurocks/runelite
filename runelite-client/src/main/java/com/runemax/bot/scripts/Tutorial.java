@@ -118,7 +118,7 @@ public class Tutorial extends BotScript {
                 break;
             case 3:
                 if (Game.isFixedMode()) {
-                    Tabs.open(Tab.INVENTORY);
+                    Tabs.open(Tab.OPTIONS);
                     break;
                 }
 
