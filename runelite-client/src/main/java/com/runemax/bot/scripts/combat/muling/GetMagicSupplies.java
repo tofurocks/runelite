@@ -18,10 +18,7 @@ import com.runemax.bot.api.worlds.Worlds;
 import com.runemax.bot.api.wrappers.entity.actor.player.Player;
 import com.runemax.bot.scripts.Store;
 import com.runemax.bot.scripts.combat.CombatStore;
-import com.runemax.bot.scripts.muling.ItemRequest;
-import com.runemax.bot.scripts.muling.RestockAcknowledgement;
-import com.runemax.bot.scripts.muling.RestockOffer;
-import com.runemax.bot.scripts.muling.RestockRequest;
+import com.runemax.bot.scripts.muling.*;
 import com.runemax.bot.tasks.subtasks.WalkTask;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.EquipmentInventorySlot;
@@ -51,6 +48,7 @@ public class GetMagicSupplies extends Task {
         channel = Store.getChannel();
         try {
             createOfferListener();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +56,10 @@ public class GetMagicSupplies extends Task {
 
     @Override
     public boolean activate() {
-        if (Skills.getLevel(Skill.ATTACK) < 30 || Skills.getLevel(Skill.DEFENCE) < 30){
+        if (state != REQUEST_NOT_SENT) {
+            return true; // Handle muling
+        }
+        if (Skills.getLevel(Skill.ATTACK) < 30 || Skills.getLevel(Skill.DEFENCE) < 30) {
             return false; //Not done training melee yet
         }
         if (Inventory.first("Mind rune").isPresent()
@@ -77,10 +78,18 @@ public class GetMagicSupplies extends Task {
     @Override
     public int execute() {
         log.info("State is " + state.toString());
-        if(Worlds.getCurrentWorldId() != 470){
+        if (Inventory.first("Mind rune").isPresent()
+                && (Inventory.first("Staff of air").isPresent() || (Equipment.isOccupied(EquipmentInventorySlot.WEAPON) && Equipment.inSlot(EquipmentInventorySlot.WEAPON).getName().equals("Staff of air")))) {
+            //We already have a staff of air and mind runes, we should reset state and confirm delivery
+            state = REQUEST_NOT_SENT;
+            log.info("We got our stuff, confirming delivery");
+            confirmDelivery();
+            return 0;
+        }
+        if (Worlds.getCurrentWorldId() != 470) {
             log.info("Hopping to world 470 to trade mule");
             Worlds.switchTo(Worlds.get(470));
-            return Rand.nextInt(5*1000, 10*1000);
+            return Rand.nextInt(5 * 1000, 10 * 1000);
         }
         if (Trade.getView().equals(Trade.View.CLOSED) && seenSecondTradeScreen) {
             /** We have already seen the second trade screen and we are not in a trade, we probably completed our trade already */
@@ -90,6 +99,11 @@ public class GetMagicSupplies extends Task {
         }
         switch (state) {
             case REQUEST_NOT_SENT:
+                if(Inventory.all().size() >= 27){
+                    log.info("We don't have 2 free inventory spaces, dropping something before we request stuff");
+                    Inventory.all().get(0).interact("Drop");
+                    return Rand.nextInt(1*1000, 2*1000);
+                }
                 requestStuff();
                 state = REQUEST_SENT;
                 break;
@@ -124,7 +138,7 @@ public class GetMagicSupplies extends Task {
             return;
         }
         if (Trade.getView() == Trade.View.CLOSED) {
-            if(tradeAttempt > 5){
+            if (tradeAttempt > 5) {
                 log.info("We tried to trade the mule over 5 times and they never traded us back, expiring everthing");
                 strike = 0;
                 tradeAttempt = 0;
@@ -152,8 +166,8 @@ public class GetMagicSupplies extends Task {
 
     private void createOfferListener() throws IOException {
         log.info("Creating offer listener");
-        channel.queueDeclare(Players.getLocal().getName(), false, false, false, null);
         String ourHandle = Players.getLocal().getName();
+        channel.queueDeclare(Players.getLocal().getName(), false, false, false, null); //Create queue for us to receive offers
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
@@ -213,6 +227,23 @@ public class GetMagicSupplies extends Task {
         }
         log.info("Setting state to ACKNOWLEDGEMENT_SENT");
         state = RELOAD_STATE.ACKNOWLEDGEMENT_SENT;
+    }
+
+    private void confirmDelivery() {
+        try {
+            System.out.println("Confirming restock delivered");
+            String theirHandle = offer.getHandle();
+            DeliveryAcknowledgement confirmation = new DeliveryAcknowledgement();
+            confirmation.setHandle(Players.getLocal().getName());
+            Channel channel = Store.getChannel();
+            byte[] message = new ObjectMapper().writeValueAsBytes(confirmation);
+            channel.queueDeclare(theirHandle + "delivery", false, false, false, null);
+            channel.basicPublish("", theirHandle + "delivery", null, message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        log.info("Setting state to REQUEST_NOT_SENT");
+        state = REQUEST_NOT_SENT;
     }
 
     enum RELOAD_STATE {

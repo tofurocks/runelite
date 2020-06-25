@@ -9,6 +9,7 @@ import com.runemax.bot.api.skill.Skills;
 import com.runemax.bot.api.tabs.magic.Spell;
 import com.runemax.bot.api.varps.Varps;
 import com.runemax.bot.api.widget.WidgetQuery;
+import com.runemax.bot.api.wrappers.widget.Widget;
 import com.runemax.bot.scripts.combat.CombatStore;
 import lombok.extern.slf4j.Slf4j;
 import net.runelite.api.EquipmentInventorySlot;
@@ -65,7 +66,7 @@ public class EquipMagicGear extends Task {
         OPEN_COMBAT_TAB.get().interact(0);
         Sleep.sleep(1000, 2000);
         if(OPEN_SPELL_SELECT.get().isPresent()) {
-            log.info("Opening spell select");
+            log.info("Opening spell select with id " + OPEN_SPELL_SELECT.get().getId());
             OPEN_SPELL_SELECT.get().interact(0);
             Sleep.sleep(1000, 2000);
         }

@@ -94,8 +94,8 @@ public class Fighter extends BotScript {
             tasks.add(new WalkToSeagulls());
             tasks.add(new ContinueDialog());
             /** Cow training tasks */
-            tasks.add(new EquipMagicGear());
             tasks.add(new GetMagicSupplies());
+            tasks.add(new EquipMagicGear());
             tasks.add(new WalkToCows());
             tasks.add(new AutoFight("Seagull"));
         }
