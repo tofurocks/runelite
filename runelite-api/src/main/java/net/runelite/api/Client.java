@@ -810,6 +810,11 @@ public interface Client extends GameShell
 	void setVarbitValue(int[] varps, int varbit, int value);
 
 	/**
+	 * @return the total number of VarbitDefinition
+	 */
+	int getVarbitCount();
+
+	/**
 	 * Gets the widget flags table.
 	 *
 	 * @return the widget flags table
@@ -2044,6 +2049,7 @@ public interface Client extends GameShell
 	boolean shouldRenderLoginScreenFire();
 
 	/**
+<<<<<<< HEAD
 	 * Extra stuff added for fartbot usage
 	 * @author fatretard
 	 */
@@ -2073,5 +2079,13 @@ public interface Client extends GameShell
 	String getLoginResponse3();
 
 	int getIsItemSelected();
+
+
+	 /** Test if a key is pressed
+	 * @param keycode the keycode
+	 * @return
+	 * @see KeyCode
+	 */
+	boolean isKeyPressed(int keycode);
 
 }

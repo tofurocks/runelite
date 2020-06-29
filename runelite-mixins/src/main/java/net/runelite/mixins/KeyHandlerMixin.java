@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2018, Adam <Adam@sigterm.info>
+ * Copyright (c) 2020, Owain van Brakel <https://github.com/Owain94>
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -22,24 +22,23 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-package net.runelite.api.events;
+package net.runelite.mixins;
 
-import lombok.Value;
-import net.runelite.api.GameObject;
-import net.runelite.api.Tile;
+import net.runelite.api.mixins.Inject;
+import net.runelite.api.mixins.Mixin;
+import net.runelite.api.mixins.Shadow;
+import net.runelite.rs.api.RSClient;
 
-/**
- * An event where a {@link GameObject} is added to a {@link Tile}.
- */
-@Value
-public class GameObjectSpawned implements Event
+@Mixin(RSClient.class)
+public abstract class KeyHandlerMixin implements RSClient
 {
-	/**
-	 * The affected tile.
-	 */
-	Tile tile;
-	/**
-	 * The newly spawned game object.
-	 */
-	GameObject gameObject;
+	@Shadow("client")
+	private static RSClient client;
+
+	@Inject
+	public boolean isKeyPressed(int keycode)
+	{
+		boolean[] pressedKeys = client.getPressedKeys();
+		return pressedKeys[keycode];
+	}
 }
